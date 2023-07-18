@@ -37,17 +37,23 @@ $this->carbon=Carbon::now();
         $available_time=[];
         // $doctor_id=Doctor::where('name','like',$doctor)->pluck('id');
         $slots=ModelsSlot::with('timeslot')->where('doctors_id','=',$doctor_id)->where('date','like',$date)->get();
-        if(count($slots)>0){
-        $slot_array=$slots[0]->timeslot->where('is_available',false)->pluck('time');
-        foreach($slot_array as $slot){
-            array_push($available_time,$slot);
-        }
-        $this->available_time_slots=$available_time;
+   
+if(count($slots)>0) {
 
+    foreach($slots as $slot) {
+        if(count($slot->timeslot)>0) {
+            foreach($slot->timeslot as $time_slot) {
+                array_push($available_time, $time_slot->time);
+
+            }
+            
         }
-        else{
-            $this->available_time_slots=[];
-        }
+        
+    }
+    $this->available_time_slots=$available_time;
+}
+
+       
         
     }
 

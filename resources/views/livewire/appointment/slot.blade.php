@@ -1,9 +1,11 @@
 <div x-data="{
 available_slot:[],
 
-
 }" x-effect="available_slot=[];">
 
+@php
+    print_r($available_time_slots);
+@endphp
 @foreach ($available_time_slots as $slot )
    <div x-init="
    available_slot.push('{{$slot}}')" ></div>
@@ -85,7 +87,7 @@ available_slot.includes('{{date('H:i:s',$time_slot)}}') ||({{strtotime(date("H:i
         selected_date=='{{$carbon->format('o-m-j')}}') ? 'border:D1D5D8;color:#6B7280;cursor: not-allowed;' :
         selected_time=='{{date('H:i:s',$time_slot)}}'? 'background-color:#212245;color:white;':'border-color:#878787'"   
         :disabled="available_slot.includes('{{date('H:i:s',$time_slot)}}') || ({{strtotime(date("H:i:s",time()))}} > {{strtotime(date('H:i:s',$time_slot))}} &&
-        selected_date=='{{$carbon->format('o-m-j')}}')? true :false"        >
+        selected_date=='{{$carbon->format('o-m-j')}}')? true :false" >
         {{date('h:i A',$time_slot)}} </button>
 @endif
 @endforeach
