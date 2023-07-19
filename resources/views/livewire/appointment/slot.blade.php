@@ -3,9 +3,7 @@ available_slot:[],
 
 }" x-effect="available_slot=[];">
 
-@php
-    print_r($available_time_slots);
-@endphp
+
 @foreach ($available_time_slots as $slot )
    <div x-init="
    available_slot.push('{{$slot}}')" ></div>
@@ -13,7 +11,6 @@ available_slot:[],
 
 <div x-init="console.log(available_slot)"></div>
     {{-- MORNING SLOTS --}}
-
     <div class="mt-6 lg:mt-16 2xl:mx-96">
         @foreach ($time_slots as $time_slot)
         @if ($time_slot<=strtotime('12:00:00')) 
@@ -63,7 +60,7 @@ available_slot:[],
 available_slot.includes('{{date('H:i:s',$time_slot)}}') ||({{strtotime(date("H:i:s",time()))}} > {{strtotime(date('H:i:s',$time_slot))}} && selected_date=='{{$carbon->format('o-m-j')}}') ? 'border:D1D5D8;color:#6B7280;cursor: not-allowed;' :
         selected_time=='{{date('H:i:s',$time_slot)}}'? 'background-color:#212245;color:white;':'border-color:#878787'"   
         :disabled="available_slot.includes('{{date('H:i:s',$time_slot)}}') || ({{strtotime(date("H:i:s",time()))}} > {{strtotime(date('H:i:s',$time_slot))}} &&
-        selected_date=='{{$carbon->format('o-m-j')}}')? true :false"        
+        selected_date=='{{$carbon->format('o-m-j')}}')? true :false"       
         >
             {{date('h:i A',$time_slot)}} </button>
 @endif
@@ -87,7 +84,8 @@ available_slot.includes('{{date('H:i:s',$time_slot)}}') ||({{strtotime(date("H:i
         selected_date=='{{$carbon->format('o-m-j')}}') ? 'border:D1D5D8;color:#6B7280;cursor: not-allowed;' :
         selected_time=='{{date('H:i:s',$time_slot)}}'? 'background-color:#212245;color:white;':'border-color:#878787'"   
         :disabled="available_slot.includes('{{date('H:i:s',$time_slot)}}') || ({{strtotime(date("H:i:s",time()))}} > {{strtotime(date('H:i:s',$time_slot))}} &&
-        selected_date=='{{$carbon->format('o-m-j')}}')? true :false" >
+        selected_date=='{{$carbon->format('o-m-j')}}')? true :false" 
+        >
         {{date('h:i A',$time_slot)}} </button>
 @endif
 @endforeach

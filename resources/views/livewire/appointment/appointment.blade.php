@@ -11,6 +11,7 @@
    
    
 }"  x-effect="Livewire.emit('available_time',selected_doctor,selected_date)">
+
 <!-- Desktop male & female flex section start  -->
     @livewire('appointment.doctor')
     <!-- Desktop male & female flex section end  -->
